@@ -44,8 +44,8 @@ export default function Example(props) {
 };
 ```
 
-| prop | value | required/optional | description | | description |
-| ---- | ----- | ----------------- | ----------- | | ----------- |
+| prop | value | required/optional | description | default |
+| ---- | ----- | ----------------- | ----------- | ----------- |
 | title | string | optional | The button title | "Submit" |
 | fields | object | required | the fields to show | [] |
 | onSubmit | function | required | the function to call when the submit button is pressed | null |
