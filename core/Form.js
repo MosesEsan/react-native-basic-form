@@ -3,7 +3,7 @@ import {Alert, KeyboardAvoidingView, ScrollView, StyleSheet, View} from 'react-n
 import {Button} from 'react-native-elements';
 
 import reducer, {SET_ERROR, TEXT_CHANGE} from "./reducer";
-import TextInput from "./helpers/TextInput.js";
+import TextInput from "../helpers/TextInput.js";
 
 const FormContext = React.createContext();
 
