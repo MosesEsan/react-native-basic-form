@@ -13,7 +13,7 @@ Shows a form
 ```javascript
 import React from 'react';
 import {View} from 'react-native';
-import Form, {CTA} from "../react-native-basic-form";
+import Form from "../react-native-basic-form";
 
 export default function Example(props) {
     const [loading, setLoading] = useState(false);
