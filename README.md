@@ -4,7 +4,7 @@ React Native Components
 ### Installation
 
 ```bash
-$
+$ npm install --save react-native-basic-form
 ```
 
 ### Form
