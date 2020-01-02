@@ -1,12 +1,22 @@
 {
   "name": "react-native-basic-form",
-  "version": "1.0.2",
-  "description": "",
+  "version": "1.0.5",
+  "description": "A simple React Native form component.",
+  "homepage": "https://github.com/MosesEsan/react-native-basic-form",
+  "bugs": {
+    "url": "https://github.com/MosesEsan/react-native-basic-form/issues"
+  },
+  "keywords": [
+    "react-native",
+    "reactjs",
+    "reactnative",
+    "bootstrap"
+  ],
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Moses Esan",
   "license": "ISC",
   "dependencies": {
     "react-native-elements": "^1.2.7"

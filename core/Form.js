@@ -9,15 +9,27 @@ const FormContext = React.createContext();
 
 export default function Form(props) {
     const {fields, onSubmit, title, loading} = props;
-    const {style, keyboardShouldPersistTaps} = props;
+    const {style, keyboardShouldPersistTaps, buttonStyle} = props;
     let scrollViewProps = {style, keyboardShouldPersistTaps, showsVerticalScrollIndicator:false};
 
     //1 - CREATE INITIAL STATE - dynamically construct the reducer initial state by using the fierds name and value(if any)
     let error = {};
     const initialState = fields.reduce((obj, field) => {
-        obj[field.name] = field.value || "";
-        error[field.name] = "";
-        return obj;
+        let arr = Array.isArray(field);
+
+        if(arr === false) {
+            obj[field.name] = field.value || "";
+            error[field.name] = "";
+            return obj;
+        } else if(arr){
+            let obj_ = obj;
+
+            field.map((fld) => {
+                obj_[fld.name] = fld.value || "";
+                error[fld.name] = "";
+            });
+            return obj_;
+        }
     }, {});
 
     initialState["error"] = error;
@@ -42,7 +54,6 @@ export default function Form(props) {
         }, {});
 
         if (!isValid) handleError(error_);
-
         else await onSubmit(state);
     };
 
@@ -51,32 +62,55 @@ export default function Form(props) {
         dispatch({type: SET_ERROR, error});
     };
 
+
+    const renderTextInput = (field, index, grouped=false) => {
+        let {name} = field;
+        let onChangeText = changeText(name);
+        let errorMessage = state["error"].hasOwnProperty(name) ? state["error"][name] : null;
+        let key = !grouped ? `${name}_${index}` : `${name}_arr_${index}`;
+        let Component =
+            <TextInput {...field}
+                       value={state[name]}
+                       errorMessage={errorMessage}
+                       onChangeText={onChangeText}
+                       key={key}/>;
+
+        if(grouped){
+            return (
+                <View style={{marginLeft:index === 1 ? 16: 0, flex:1}} key={key}>
+                    {Component}
+                </View>
+            )
+        }else{
+            return Component;
+        }
+    };
     //=================================================================================================
 
     const value = useMemo(() => [state, dispatch], [state]);
     return (
         <FormContext.Provider value={value}>
             <KeyboardAvoidingView behavior="padding">
-                <ScrollView {...scrollViewProps} contentContainerStyle={styles.contentContainerStyle}>
+                <ScrollView {...scrollViewProps} contentContainerStyle={{}}>
                     <View style={{justifyContent: "center"}}>
                         {fields.map((field, idx) => {
-                            let {name} = field;
-                            let onChangeText = changeText(name);
-                            let errorMessage = state["error"].hasOwnProperty(name) ? state["error"][name] : null;
-                            return (
-                                <TextInput {...field}
-                                           value={state[name]}
-                                           errorMessage={errorMessage}
-                                           onChangeText={onChangeText}
-                                key={`${name}_${idx}`}/>
-                            )
+
+                            let arr = Array.isArray(field);
+                            if(!arr) return renderTextInput(field, idx);
+                            else if(arr){
+                                return(
+                                    <View style={{borderWidth:1, flex:1, flexDirection:"row"}} key={ `arr_${idx}`}>
+                                        {field.map((fld, index) => renderTextInput(fld, index, true))}
+                                    </View>
+                                )
+                            }
                         })}
 
                         <Button title={title}
                                 onPress={onPress}
                                 loading={loading}
                                 containerStyle={styles.buttonContainer}
-                                buttonStyle={styles.button}
+                                buttonStyle={[styles.button, buttonStyle]}
                                 titleStyle={styles.buttonText}/>
 
                         {props.children}
@@ -95,16 +129,11 @@ Form.defaultProps = {
     title: "Submit",
     loading: false,
     style: {backgroundColor: 'transparent'},
+    buttonStyle: {},
     keyboardShouldPersistTaps: 'handled'
 };
 
 const styles = StyleSheet.create({
-    contentContainerStyle: {
-        // flexGrow: 1,
-        // justifyContent: 'space-between',
-        // flexDirection: 'column'
-    },
-
     buttonContainer: {
         marginTop: 35
     },

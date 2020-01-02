@@ -50,7 +50,8 @@ export default function Example(props) {
 | fields | object | required | the fields to show | [] |
 | onSubmit | function | required | the function to call when the submit button is pressed | null |
 | loading | boolean | optional | if true, button is disabled and shows a loading icon | false |
-| style | function | optional | the style for the container | {{}} |
-| keyboardShouldPersistTaps | number | optional | Determines when the keyboard should stay visible after a tap.| 'handled' |
+| style | object | optional | the style for the container | {} |
+| buttonStyle | object | optional | the style for the button | {} |
+| keyboardShouldPersistTaps | string | optional | Determines when the keyboard should stay visible after a tap.| 'handled' |
 
 keyboardShouldPersistTaps:https://facebook.github.io/react-native/docs/scrollview#keyboardshouldpersisttaps
