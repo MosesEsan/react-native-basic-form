@@ -99,7 +99,7 @@ export default function Form(props) {
                             if(!arr) return renderTextInput(field, idx);
                             else if(arr){
                                 return(
-                                    <View style={{borderWidth:1, flex:1, flexDirection:"row"}} key={ `arr_${idx}`}>
+                                    <View style={{flex:1, flexDirection:"row"}} key={ `arr_${idx}`}>
                                         {field.map((fld, index) => renderTextInput(fld, index, true))}
                                     </View>
                                 )
