@@ -1,6 +1,6 @@
 {
   "name": "react-native-basic-form",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "A simple React Native form component.",
   "homepage": "https://github.com/MosesEsan/react-native-basic-form",
   "bugs": {
@@ -19,7 +19,8 @@
   "author": "Moses Esan",
   "license": "ISC",
   "dependencies": {
-    "react-native-elements": "^1.2.7"
+    "react-native-elements": "^1.2.7",
+    "react-native-picker-select": "^6.4.0"
   },
   "devDependencies": {
     "metro-react-native-babel-preset": "^0.57.0"
