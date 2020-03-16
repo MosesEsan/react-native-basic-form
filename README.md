@@ -5,6 +5,10 @@ React Native Components
 
 ```bash
 $ npm install --save react-native-basic-form
+
+//dependencies (Reat Native CLI only)
+npm i --save react-native-vector-icons  
+react-native link react-native-vector-icon
 ```
 
 ### Form
