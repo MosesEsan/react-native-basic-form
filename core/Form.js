@@ -81,6 +81,7 @@ export default function Form(props) {
                         errorMessage={errorMessage}
                         onChangeText={onChangeText}
                         keyboardType={type}
+                        testID={field.testID || name}
                         key={key}/>);
 
         //CHECK IF TYPE IS DROPDOWN
@@ -91,6 +92,7 @@ export default function Form(props) {
                            value={state[name]}
                            errorMessage={errorMessage}
                            onValueChange={onChangeText}
+                           testID={field.testID || name}
                            key={key}/>)
         }
 
@@ -113,7 +115,7 @@ export default function Form(props) {
                 <ScrollView {...scrollViewProps} contentContainerStyle={{}}>
 
 
-                    <View style={{justifyContent: "center"}}>
+                    <View style={{justifyContent: "center"}} testID={"FormContainer"}>
                         {fields.map((field, idx) => {
 
                             let arr = Array.isArray(field);

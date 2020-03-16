@@ -3,13 +3,13 @@ import {Text, StyleSheet, View} from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
 
 export default function DropDown(props) {
-    let {label, items, value, onValueChange, containerStyle, innerContainerStyle, labelStyle, textStyle} = props;
+    let {label, items, value, onValueChange, containerStyle, innerContainerStyle, labelStyle, textStyle, testID} = props;
 
     return (
         <View style={[styles.container, containerStyle]}>
             <View style={[styles.innerContainer, innerContainerStyle]}>
                 <Text style={[styles.label, labelStyle]}>{label}</Text>
-                <RNPickerSelect onValueChange={onValueChange} items={items} value={value}
+                <RNPickerSelect onValueChange={onValueChange} items={items} value={value} testID={testID}
                                 style={{inputIOS: {...styles.input, ...textStyle}}}/>
             </View>
             {(props.errorMessage !== null) ? <Text style={styles.error}>{props.errorMessage}</Text> : null}
@@ -18,6 +18,7 @@ export default function DropDown(props) {
 }
 
 DropDown.defaultProps = {
+    testID:"",
     label: "",
     items: [],
     value:null,

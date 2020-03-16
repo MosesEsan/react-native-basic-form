@@ -4,7 +4,7 @@ import {View, StyleSheet} from 'react-native';
 import {Input, Icon} from 'react-native-elements';
 
 const TextInput = (props) => {
-    let {label, value, errorMessage, placeholder, secure, onChangeText, keyboardType} = props;
+    let {label, value, errorMessage, placeholder, secure, onChangeText, keyboardType, testID} = props;
 
     const [visible, setVisibility] = useState(secure);
 
@@ -24,6 +24,7 @@ const TextInput = (props) => {
                 labelStyle={styles.labelStyle}
                 onChangeText={onChangeText}
                 keyboardType={keyboardType}
+                testID={testID}
             />
             {
                 secure &&
@@ -39,6 +40,7 @@ const TextInput = (props) => {
 };
 
 TextInput.defaultProps = {
+    testID:"",
     label: "",
     value: "",
     errorMessage: "",
@@ -49,7 +51,7 @@ TextInput.defaultProps = {
 
 
     iconSize: 23,
-    iconColor: "#222222"
+    iconColor: "#222222",
 };
 
 const styles = StyleSheet.create({
