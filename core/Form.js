@@ -49,17 +49,30 @@ export default function Form(props) {
     //3 - ON PRESS - Validate before ssubmitting
     const onPress = async () => {
         const {error, ...clone} = state;
-        const keys = Object.keys(clone);
-        const isValid = keys.every(key => !!state[key]);
 
-        const error_ = keys.reduce((obj, key) => {
-            obj[key] = (!state[key] || 0 === state[key].length) ? `${key} is required` : '';
+        const validateKeys = [];
+
+        Object.keys(clone).map((key, idx) => {
+            const index = fields.findIndex((obj) => obj.name === key);
+            if (index !== -1 && fields[index]['required'] === true) {
+                validateKeys.push(key)
+            }
+        });
+
+        const isValid = validateKeys.every(key => !!state[key]);
+
+        const error_ = validateKeys.reduce((obj, key) => {
+            obj[key] = (!state[key] || 0 === state[key].length) ? `${capitalizeFirstLetter(key)} is required` : '';
             return obj;
         }, {});
 
         if (!isValid) handleError(error_);
         else await onSubmit(state);
     };
+
+    function capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
 
     const handleError = (error) => {
         Alert.alert('Input error', 'Please input all required fields.');
@@ -97,7 +110,12 @@ export default function Form(props) {
                            key={key}/>)
         } else if (type === TYPES.Image) {
             Component =
-                (<View style={{borderBottomWidth: 1, borderColor: "#E2E2E2", paddingVertical: 16, justifyContent:"center"}} key={key}>
+                (<View style={{
+                        borderBottomWidth: 1,
+                        borderColor: "#E2E2E2",
+                        paddingVertical: 16,
+                        justifyContent: "center"
+                    }} key={key}>
                         {
                             !showImagePicker ?
                                 <Text>{"Get Permission Props Not Passed"}</Text>
