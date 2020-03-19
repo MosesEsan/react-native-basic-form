@@ -1,19 +1,20 @@
 import React, {useMemo, useReducer} from 'react';
-import {Alert, KeyboardAvoidingView, ScrollView, StyleSheet, View} from 'react-native';
+import {Alert, KeyboardAvoidingView, ScrollView, StyleSheet, View, Text} from 'react-native';
 import {Button} from 'react-native-elements';
 
 import reducer, {SET_ERROR, TEXT_CHANGE} from "./reducer";
 import TextInput from "../helpers/TextInput.js";
 import DropDown from "../helpers/DropDown";
+import Image from "../helpers/Image";
 
 const FormContext = React.createContext();
 
-export const TYPES = {Text: "default", Number: "numeric", Dropdown: "dropdown"};
+export const TYPES = {Text: "default", Number: "numeric", Dropdown: "dropdown", Image: "image"};
 
 export default function Form(props) {
-    const {fields, onSubmit, title, loading} = props;
-    const {style, keyboardShouldPersistTaps, buttonStyle} = props;
-    let scrollViewProps = {style, keyboardShouldPersistTaps, showsVerticalScrollIndicator: false};
+    const {fields, onSubmit, title, loading, showImagePicker} = props;
+    const {keyboardShouldPersistTaps, buttonStyle} = props;
+    let scrollViewProps = {keyboardShouldPersistTaps, showsVerticalScrollIndicator: false};
 
     //1 - CREATE INITIAL STATE - dynamically construct the reducer initial state by using the fierds name and value(if any)
     let error = {};
@@ -94,6 +95,25 @@ export default function Form(props) {
                            onValueChange={onChangeText}
                            testID={field.testID || name}
                            key={key}/>)
+        } else if (type === TYPES.Image) {
+            Component =
+                (<View style={{borderBottomWidth: 1, borderColor: "#E2E2E2", paddingVertical: 16, justifyContent:"center"}} key={key}>
+                        {
+                            !showImagePicker ?
+                                <Text>{"Get Permission Props Not Passed"}</Text>
+                                :
+                                <Image size={100}
+                                       imageStyle={{}}
+                                       style={{borderColor: "red", borderWidth: 1}}
+                                       borderWidth={0}
+                                       getPermission={null}
+                                       showImagePicker={showImagePicker}
+                                       onImageSelected={onChangeText}
+                                       testID={field.testID || name}
+                                       key={key}/>
+                        }
+                    </View>
+                )
         }
 
         if (grouped) {
@@ -111,11 +131,11 @@ export default function Form(props) {
     const value = useMemo(() => [state, dispatch], [state]);
     return (
         <FormContext.Provider value={value}>
-            <KeyboardAvoidingView behavior="padding">
+            <KeyboardAvoidingView behavior="padding" style={[{flex: 1}, props.style]}>
                 <ScrollView {...scrollViewProps} contentContainerStyle={{}}>
 
 
-                    <View style={{justifyContent: "center"}} testID={"FormContainer"}>
+                    <View style={{justifyContent: "center", flex: 1}} testID={"FormContainer"}>
                         {fields.map((field, idx) => {
 
                             let arr = Array.isArray(field);
@@ -153,7 +173,8 @@ Form.defaultProps = {
     loading: false,
     style: {backgroundColor: 'transparent'},
     buttonStyle: {},
-    keyboardShouldPersistTaps: 'handled'
+    keyboardShouldPersistTaps: 'handled',
+    showImagePicker: null,
 };
 
 const styles = StyleSheet.create({

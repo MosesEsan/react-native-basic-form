@@ -33,7 +33,8 @@ DropDown.defaultProps = {
 const styles = StyleSheet.create({
     container: {
         backgroundColor: "#fff",
-        marginBottom: 11
+        marginTop: 19,
+        marginBottom:0
     },
 
     innerContainer: {
