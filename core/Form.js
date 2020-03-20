@@ -1,15 +1,16 @@
 import React, {useMemo, useReducer} from 'react';
-import {Alert, KeyboardAvoidingView, ScrollView, StyleSheet, View, Text} from 'react-native';
+import {Alert, KeyboardAvoidingView, ScrollView, StyleSheet, Text, View} from 'react-native';
 import {Button} from 'react-native-elements';
 
 import reducer, {SET_ERROR, TEXT_CHANGE} from "./reducer";
 import TextInput from "../helpers/TextInput.js";
 import DropDown from "../helpers/DropDown";
 import Image from "../helpers/Image";
+import DateInput from "../helpers/DateInput";
 
 const FormContext = React.createContext();
 
-export const TYPES = {Text: "default", Number: "numeric", Dropdown: "dropdown", Image: "image"};
+export const TYPES = {Text: "default", Number: "numeric", Dropdown: "dropdown", Image: "image", Date: "date"};
 
 export default function Form(props) {
     const {fields, onSubmit, title, loading, showImagePicker} = props;
@@ -67,7 +68,7 @@ export default function Form(props) {
         }, {});
 
         if (!isValid) handleError(error_);
-        else await onSubmit(state);
+        else await onSubmit(clone);
     };
 
     function capitalizeFirstLetter(string) {
@@ -132,6 +133,13 @@ export default function Form(props) {
                         }
                     </View>
                 )
+        } else if (type === TYPES.Date) {
+            Component =
+                (<DateInput label={field.label}
+                            errorMessage={errorMessage}
+                            onDateSelected={onChangeText}
+                            testID={field.testID || name}
+                            key={key}/>)
         }
 
         if (grouped) {

@@ -1,7 +1,7 @@
 {
   "name": "react-native-basic-form",
-  "version": "1.0.8",
-  "description": "A simple React Native form component with TextInput, DropDown and Image fields.",
+  "version": "1.0.9",
+  "description": "A simple React Native form component with TextInput (including multiline), DropDown, Image and Date fields.",
   "homepage": "https://github.com/MosesEsan/react-native-basic-form",
   "bugs": {
     "url": "https://github.com/MosesEsan/react-native-basic-form/issues"
@@ -19,7 +19,9 @@
   "author": "Moses Esan",
   "license": "ISC",
   "dependencies": {
+    "@react-native-community/datetimepicker": "^2.2.3",
     "react-native-elements": "^1.2.7",
+    "react-native-modal-datetime-picker": "^8.5.1",
     "react-native-picker-select": "^6.4.0"
   },
   "devDependencies": {

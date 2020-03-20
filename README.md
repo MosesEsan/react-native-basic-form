@@ -24,14 +24,24 @@ import Form, {TYPES} from 'react-native-basic-form';
 export default function Example(props) {
     const [loading, setLoading] = useState(false);
 
+    const options = [
+        {label:"Music", value:1},
+        {label:"Concert", value:2}
+    ];
+    
     const fields = [
         {name: 'image', label: 'Profile Image', required: true, type: TYPES.Image},
         {name: 'email', label: 'Email Address', required: true},
         {name: 'password', label: 'Password', required: true, secure: true},
-        {name: 'account_type', label: 'Account Type', required: true, type: TYPES.Dropdown, options: []},
-        {name: 'about_me', label: 'About Me', required: true, multiline: true}
+        {name: 'account_type', label: 'Account Type', required: true, type: TYPES.Dropdown, options: options},
+        {name: 'price', label: 'ENTRANCE FEE', required: true, type:TYPES.Number},
+        {name: 'about_me', label: 'About Me', required: true, multiline: true},
+        [
+            //group to appear side by side
+            {name: 'start_date', label: 'START DATE', required: true, type: TYPES.Date},
+            {name: 'end_date', label: 'END DATE', required: true, type: TYPES.Date}
+        ]
     ];
-
 
     async function onSubmit(data) {
         setLoading(true);
@@ -39,7 +49,6 @@ export default function Example(props) {
         console.log(data)
         ....
     }
-    
     
     async function showImagePicker() {
         try{
