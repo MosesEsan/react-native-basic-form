@@ -121,15 +121,17 @@ export default function Form(props) {
                             !showImagePicker ?
                                 <Text>{"Get Permission Props Not Passed"}</Text>
                                 :
-                                <Image size={100}
-                                       imageStyle={{}}
-                                       style={{borderColor: "red", borderWidth: 1}}
-                                       borderWidth={0}
-                                       getPermission={null}
-                                       showImagePicker={showImagePicker}
-                                       onImageSelected={onChangeText}
-                                       testID={field.testID || name}
-                                       key={key}/>
+                                <Image
+                                    image={state[name]}
+                                    size={100}
+                                    imageStyle={{}}
+                                    style={{borderColor: "red", borderWidth: 1}}
+                                    borderWidth={0}
+                                    getPermission={null}
+                                    showImagePicker={showImagePicker}
+                                    onImageSelected={onChangeText}
+                                    testID={field.testID || name}
+                                    key={key}/>
                         }
                     </View>
                 )
