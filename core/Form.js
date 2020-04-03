@@ -122,10 +122,8 @@ export default function Form(props) {
                                 <Text>{"Get Permission Props Not Passed"}</Text>
                                 :
                                 <Image
-                                    image={state[name]}
+                                    image={state[name].length > 0 ? state[name] : null }
                                     size={100}
-                                    imageStyle={{}}
-                                    style={{borderColor: "red", borderWidth: 1}}
                                     borderWidth={0}
                                     getPermission={null}
                                     showImagePicker={showImagePicker}
