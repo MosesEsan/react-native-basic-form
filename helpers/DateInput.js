@@ -1,14 +1,14 @@
-import React, {useState, useMemo} from 'react';
+import React, {useState, useMemo, useEffect} from 'react';
 import {StyleSheet, Text, View, TouchableHighlight} from 'react-native';
 import DateTimePicker from "react-native-modal-datetime-picker";
 import moment from "moment";
 // import {Appearance} from 'react-native-appearance';
 
 export default function DatePicker_(props) {
-    const [date, setDate] = useState(props.value || new Date());
+    const [date, setDate] = useState(null);
     const [isVisible, setIsVisible] = useState(false);
 
-    let {label, mode, onDateSelected} = props;
+    let {label, mode, onDateSelected, value} = props;
 
     let dateProps = {
         mode,
@@ -22,6 +22,15 @@ export default function DatePicker_(props) {
         style, showIcon
     } = props;
 
+
+    useEffect(() => {
+        if (value && value !== undefined && value !== 'undefined'){
+            dateProps['date'] = value;
+            setDate(value)
+        }
+    }, []);
+
+
     function onTap(){
         setIsVisible(true)
     }
@@ -33,10 +42,14 @@ export default function DatePicker_(props) {
     }
 
     const dateFormatted = useMemo(() => {
-        date_ = moment(date).format("DD MMM");
-        time_ = moment(date).format("HH:mm");
+        if (date){
+            let date_ = moment(date).format("DD MMM");
+            let time_ = moment(date).format("HH:mm");
 
-        return `${date_} at ${time_}`
+            return `${date_} at ${time_}`
+        }
+
+        return ""
 
     }, [date])
 

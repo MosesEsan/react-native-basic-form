@@ -138,6 +138,7 @@ export default function Form(props) {
         } else if (type === TYPES.Date) {
             Component =
                 (<DateInput label={field.label}
+                            value={state[name]}
                             errorMessage={errorMessage}
                             onDateSelected={onChangeText}
                             testID={field.testID || name}
