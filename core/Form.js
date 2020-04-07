@@ -13,29 +13,28 @@ const FormContext = React.createContext();
 export const TYPES = {Text: "default", Number: "numeric", Dropdown: "dropdown", Image: "image", Date: "date"};
 
 export default function Form(props) {
-    const {fields, onSubmit, title, loading, showImagePicker} = props;
+    const {fields, initialData, onSubmit, title, loading, showImagePicker} = props;
     const {keyboardShouldPersistTaps, buttonStyle} = props;
     let scrollViewProps = {keyboardShouldPersistTaps, showsVerticalScrollIndicator: false};
 
     //1 - CREATE INITIAL STATE - dynamically construct the reducer initial state by using the fierds name and value(if any)
     let error = {};
-    const initialState = fields.reduce((obj, field) => {
+    let initialState = {};
+
+    fields.map((field, idx) => {
         let arr = Array.isArray(field);
 
-        if (arr === false) {
-            obj[field.name] = field.value || "";
+        if (!arr) {
+            initialState[field.name] = initialData ? String(initialData[field.name]) : "";
             error[field.name] = "";
-            return obj;
-        } else if (arr) {
-            let obj_ = obj;
-
-            field.map((fld) => {
-                obj_[fld.name] = fld.value || "";
-                error[fld.name] = "";
-            });
-            return obj_;
         }
-    }, {});
+        else if (arr) {
+            field.map((fld, index) => {
+                initialState[fld.name] = initialData ? String(initialData[fld.name]) : "";
+                error[fld.name] = "";
+            })
+        }
+    });
 
     initialState["error"] = error;
     const [state, dispatch] = useReducer(reducer, initialState);
@@ -195,6 +194,7 @@ export default function Form(props) {
 
 Form.defaultProps = {
     fields: [],
+    initialData: null,
     onSubmit: null,
     title: "Submit",
     loading: false,
