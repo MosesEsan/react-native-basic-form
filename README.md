@@ -25,10 +25,22 @@ export default function Example(props) {
     const [loading, setLoading] = useState(false);
 
     const options = [
-        {label:"Music", value:1},
-        {label:"Concert", value:2}
+        {label:"Basic", value:1},
+        {label:"Premium", value:2}
     ];
     
+    //Used in EDIT MODE
+    const initialData = {
+        "image": "http://res.cloudinary.com/ddv9bxonm/image/upload/v1585512850/ib9c0dml4dlksi8xgvob.jpg"
+        "email": "Johnsmith@yahoo.com",
+        "password": "thispasswordisencrypted",
+        "account_type": 1, //Basic account, see options
+        "price": 20,
+        "about_me": "Blah blah blah.....",
+        "start_date": "2020-04-17T21:00:00.000Z",
+        "end_date": "2020-04-17T21:00:00.000Z",
+    };
+
     const fields = [
         {name: 'image', label: 'Profile Image', required: true, type: TYPES.Image},
         {name: 'email', label: 'Email Address', required: true},
@@ -67,6 +79,7 @@ export default function Example(props) {
                 <Form
                     title={"Register"} //this is the button title
                     fields={fields}
+                    initialData={initialData} //used in edit mode
                     onSubmit={onSubmit}
                     loading={loading}
                     showImagePicker={showImagePicker}
@@ -81,6 +94,7 @@ export default function Example(props) {
 | ---- | ----- | ----------------- | ----------- | ----------- |
 | title | string | optional | The button title | "Submit" |
 | fields | object | required | the fields to show | [] |
+| initialData | object | option | the initial data, can be used in EDIT mode, the keys should match the fields key | [] |
 | onSubmit | function | required | the function to call when the submit button is pressed | null |
 | showImagePicker | function | optional | the function to call when the image is tapped | null |
 | loading | boolean | optional | if true, button is disabled and shows a loading icon | false |
