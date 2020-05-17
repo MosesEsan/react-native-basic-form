@@ -8,10 +8,17 @@ A simple React Native Form component with TextInput (including multiline), DropD
 ```bash
 $ npm install --save react-native-basic-form
 
-//dependencies (Reat Native CLI only)
+#dependencies (Reat Native CLI only < v0.16)
 npm i --save react-native-vector-icons  
 react-native link react-native-vector-icon
 ```
+
+## Dependencies Setup (for Expo projects)
+
+```bash
+expo install @react-native-community/datetimepicker
+```
+
 
 ### Form
 Shows a form
@@ -43,7 +50,8 @@ export default function Example(props) {
 
     const fields = [
         {name: 'image', label: 'Profile Image', required: true, type: TYPES.Image},
-        {name: 'email', label: 'Email Address', required: true},
+        {name: 'email', label: 'Email Address', required: true, type: TYPES.Email},
+        {name: 'username', label: 'Username', required: true, autoCapitalize: "none", autoCorrect: false},
         {name: 'password', label: 'Password', required: true, secure: true},
         {name: 'account_type', label: 'Account Type', required: true, type: TYPES.Dropdown, options: options},
         {name: 'price', label: 'ENTRANCE FEE', required: true, type:TYPES.Number},
@@ -89,7 +97,34 @@ export default function Example(props) {
     };
 };
 ```
+#### Field Types
+| Type | Notes |
+| ---- | ----- |
+| Text | Default|
+| Number | |
+| Dropdown | |
+| Image | |
+| Email | Sets the keyboard to display email-address type |
 
+
+#### Field Props
+| Prop | Value | Required/Optional | Description | Default |
+| ---- | ----- | ----------------- | ----------- | ----------- |
+| name | string | optional | The field title | "" |
+| label | string | optional | The field label | "" |
+| required | bool | optional | Whether the field is required | false |
+| secure | bool | optional | Whether the value should be masked | false |
+| type | string | optional | The field type | TYPES.Text (see above) |
+
+
+| autoCapitalize | string | optional | The field auto capitalize setting | "sentences" |
+| autoCorrect | bool | optional | The field auto correct setting | true |
+| clearButtonMode | bool | optional | When the clear button should appear on the right side of the text view. | never |
+| editable | bool | optional | If false, text is not editable. | true |
+
+
+
+#### Props
 | prop | value | required/optional | description | default |
 | ---- | ----- | ----------------- | ----------- | ----------- |
 | title | string | optional | The button title | "Submit" |
