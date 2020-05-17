@@ -4,7 +4,10 @@ import {View, StyleSheet} from 'react-native';
 import {Input, Icon} from 'react-native-elements';
 
 const TextInput = (props) => {
-    let {label, value, errorMessage, placeholder, secure, onChangeText, keyboardType, testID, multiline} = props;
+    let {label, value, errorMessage, placeholder, secure, onChangeText, testID} = props;
+
+    //Other Props
+    let {autoCapitalize, autoCorrect, clearButtonMode, editable, multiline, keyboardType} = props;
 
     const [visible, setVisibility] = useState(secure);
 
@@ -20,12 +23,18 @@ const TextInput = (props) => {
                 placeholder={placeholder}
                 errorMessage={errorMessage}
                 secureTextEntry={visible}
+                onChangeText={onChangeText}
+                testID={testID}
+
+                autoCapitalize={autoCapitalize}
+                autoCorrect={autoCorrect}
+                clearButtonMode={clearButtonMode}
+                editable={editable}
+                multiline={multiline}
+                keyboardType={keyboardType}
+
                 containerStyle={styles.containerStyle}
                 labelStyle={styles.labelStyle}
-                onChangeText={onChangeText}
-                keyboardType={keyboardType}
-                testID={testID}
-                multiline={multiline}
                 errorProps={{testID:`${testID}InputError`}}
             />
             {
@@ -47,12 +56,15 @@ TextInput.defaultProps = {
     value: "",
     errorMessage: "",
     placeholder: null,
-    password: false,
-    multiline: false,
+    secure: false,
     onChangeText: null,
+
+    autoCapitalize: 'sentences',
+    autoCorrect: false,
+    clearButtonMode: 'never',
+    editable: 'true',
+    multiline: false,
     keyboardType: 'default',
-
-
 
     iconSize: 23,
     iconColor: "#222222",
