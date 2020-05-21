@@ -62,7 +62,7 @@ TextInput.defaultProps = {
     autoCapitalize: 'sentences',
     autoCorrect: false,
     clearButtonMode: 'never',
-    editable: 'true',
+    editable: true,
     multiline: false,
     keyboardType: 'default',
 
