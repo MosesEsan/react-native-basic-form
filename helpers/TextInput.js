@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
-import {View, StyleSheet} from 'react-native';
-
-import {Input, Icon} from 'react-native-elements';
+import {StyleSheet, View} from 'react-native';
+import PropTypes from 'prop-types'; // ES6
+import {Icon, Input} from 'react-native-elements';
 
 const TextInput = (props) => {
     let {label, value, errorMessage, placeholder, secure, onChangeText, testID} = props;
@@ -11,7 +11,7 @@ const TextInput = (props) => {
 
     const [visible, setVisibility] = useState(secure);
 
-    const { iconSize, iconColor} = props;
+    const {iconSize, iconColor} = props;
 
     const toggleVisibility = () => setVisibility(!visible);
 
@@ -35,7 +35,7 @@ const TextInput = (props) => {
 
                 containerStyle={styles.containerStyle}
                 labelStyle={styles.labelStyle}
-                errorProps={{testID:`${testID}InputError`}}
+                errorProps={{testID: `${testID}InputError`}}
             />
             {
                 secure &&
@@ -51,7 +51,7 @@ const TextInput = (props) => {
 };
 
 TextInput.defaultProps = {
-    testID:"",
+    testID: "",
     label: "",
     value: "",
     errorMessage: "",
@@ -70,6 +70,10 @@ TextInput.defaultProps = {
     iconColor: "#222222",
 };
 
+TextInput.propTypes = {
+    errorMessage: PropTypes.string
+};
+
 const styles = StyleSheet.create({
     container: {
         backgroundColor: "#fff",
@@ -80,7 +84,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 0,
     },
 
-    labelStyle:{
+    labelStyle: {
         fontWeight: "400"
     },
 
