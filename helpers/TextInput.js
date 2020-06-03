@@ -7,7 +7,7 @@ const TextInput = (props) => {
     let {label, value, errorMessage, placeholder, secure, onChangeText, testID} = props;
 
     //Other Props
-    let {autoCapitalize, autoCorrect, clearButtonMode, editable, multiline, keyboardType} = props;
+    let {autoCapitalize, autoCorrect, clearButtonMode, editable, multiline, keyboardType, maxLength} = props;
 
     const [visible, setVisibility] = useState(secure);
 
@@ -32,6 +32,7 @@ const TextInput = (props) => {
                 editable={editable}
                 multiline={multiline}
                 keyboardType={keyboardType}
+                maxLength={maxLength}
 
                 containerStyle={styles.containerStyle}
                 labelStyle={styles.labelStyle}
