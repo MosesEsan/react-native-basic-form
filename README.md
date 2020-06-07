@@ -115,8 +115,6 @@ export default function Example(props) {
 | required | bool | optional | Whether the field is required | false |
 | secure | bool | optional | Whether the value should be masked | false |
 | type | string | optional | The field type | TYPES.Text (see above) |
-
-
 | autoCapitalize | string | optional | The field auto capitalize setting | "sentences" |
 | autoCorrect | bool | optional | The field auto correct setting | true |
 | clearButtonMode | bool | optional | When the clear button should appear on the right side of the text view. | never |
