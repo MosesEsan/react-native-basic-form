@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {Platform, View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 
 export default function CTA({title, cta, onPress, style, titleStyle, ctaStyle}){
     return (
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
 
     footerText: {
         fontSize: 16,
-        fontFamily: "Helvetica Neue",
+        fontFamily: Platform.OS === 'ios' ? 'Helvetica Neue' : 'Roboto',
         color: "#636466"
     },
 
@@ -49,6 +49,6 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: "#733AC2",
         fontWeight: "500",
-        fontFamily: "Helvetica Neue"
+        fontFamily: Platform.OS === 'ios' ? 'Helvetica Neue' : 'Roboto',
     }
 });

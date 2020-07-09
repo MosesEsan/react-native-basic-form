@@ -1,5 +1,5 @@
 import React, {useMemo, useReducer} from 'react';
-import {Alert, KeyboardAvoidingView, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {Platform, Alert, KeyboardAvoidingView, ScrollView, StyleSheet, Text, View} from 'react-native';
 import {Button} from 'react-native-elements';
 
 import reducer, {SET_ERROR, TEXT_CHANGE} from "./reducer";
@@ -217,6 +217,6 @@ const styles = StyleSheet.create({
     buttonText: {
         fontSize: 18,
         color: "#fff",
-        fontFamily: "HelveticaNeue-Medium"
+        fontFamily: Platform.OS === 'ios' ? 'HelveticaNeue-Medium' : 'Roboto',
     }
 });
