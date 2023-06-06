@@ -25,12 +25,12 @@ export default function Form(props) {
         let arr = Array.isArray(field);
 
         if (!arr) {
-            initialState[field.name] = initialData  && initialData[field.name]  ? String(initialData[field.name]) : "";
+            initialState[field.name] = initialData  && (typeof initialData[field.name] !== 'undefined' ) ? initialData[field.name] : "";
             error[field.name] = "";
         }
         else if (arr) {
             field.map((fld, index) => {
-                initialState[fld.name] = initialData && initialData[fld.name]  ? String(initialData[fld.name]) : "";
+                initialState[fld.name] = initialData && (typeof initialData[fld.name] !== 'undefined' ) ? initialData[fld.name] : "";
                 error[fld.name] = "";
             })
         }
